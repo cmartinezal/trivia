@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>What does “www” stand for in a website browser? </h3>
+                <button>Web World Wide</button>
+                <button>World White Web</button>
+                <button>World Wide Web</button>
+                <button>World Web Wolf</button>
+                <p id="message" class="feedback"></p>
+                <script>
+                    const answer = 'World Wide Web';
+                    const options = document.querySelectorAll('button');
+                    const message = document.querySelector('#message');
+                    const green = '#4be371';
+                    const red = '#f55f5f';
+
+                    const resetOptionsStyle = () => {
+                        for (let i = 0; i < options.length; i++) {
+                            options[i].removeAttribute('style');
+                            message.innerHTML = '';
+                        }
+                    };
+
+                    const checkAnswer = (option, answer) => {
+                        let optionSelected = option.textContent;
+                        const isCorrect = optionSelected == answer;
+                        option.style.backgroundColor = isCorrect ? green : red;
+                        message.innerHTML = isCorrect ? 'Correct!' : 'Incorrect!';
+                    };
+
+                    for (let i = 0; i < options.length; i++) {
+                        options[i].addEventListener('click', () => {
+                            resetOptionsStyle();
+                            checkAnswer(options[i], answer);
+                        });
+                    }
+                </script>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>What programming language is named after a type of Indonesian coffee?</h3>
+
+                <input autocomplete="off" autofocus type="text" id="user-answer">
+                <button id='check-question-2'>Check Answer</button>
+                <p id="message-2" class="feedback"></p>
+                <script>
+                    const answer2 = 'Java';
+                    const message2 = document.querySelector('#message-2');
+                    const input = document.querySelector('#user-answer');
+                    const checkAnswerBtn = document.querySelector('#check-question-2');
+
+                    checkAnswerBtn.addEventListener('click', () => {
+                        const isCorrect = input.value.toLowerCase() === answer2.toLowerCase();
+                        message2.innerHTML = isCorrect ? 'Correct!' : 'Incorrect!';
+                        input.style.backgroundColor = isCorrect ? green : red;
+                    });
+                </script>
+
+            </div>
+        </div>
+    </body>
+</html>
